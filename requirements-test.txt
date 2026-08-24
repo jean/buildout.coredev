@@ -1,6 +1,8 @@
 # Copied from tests.cfg
 -c constraints-all.txt
 horse-with-no-namespace
+# Stub: robotframework-browser requires a browser and cannot run on Android/Termux
+./stubs/robotframework-browser
 borg.localrole
 collective.monkeypatcher
 diazo [test]
