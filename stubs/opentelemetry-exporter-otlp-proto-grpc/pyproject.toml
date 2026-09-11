@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opentelemetry-exporter-otlp-proto-grpc"
+version = "1.44.0"
+description = "Stub for Termux/Android - re-exports the HTTP OTLP exporter under the gRPC namespace"
+dependencies = [
+    "opentelemetry-exporter-otlp-proto-http==1.44.0",
+    "opentelemetry-exporter-otlp-proto-common==1.44.0",
+    "opentelemetry-proto==1.44.0",
+    "opentelemetry-sdk",
+    "opentelemetry-api",
+    "googleapis-common-protos",
+    "typing-extensions",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = true

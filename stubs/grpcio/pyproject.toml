@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grpcio"
+version = "1.83.0"
+description = "Stub for Termux/Android - grpcio requires C compilation which fails on Android"
