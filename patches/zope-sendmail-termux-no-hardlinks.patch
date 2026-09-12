@@ -1,0 +1,21 @@
+diff --git a/zope/sendmail/queue.py b/zope/sendmail/queue.py
+--- a/zope/sendmail/queue.py
++++ b/zope/sendmail/queue.py
+@@ -17,6 +17,7 @@ import logging
+ import os
+ import smtplib
+ import sys
++import shutil
+ import threading
+ import time
+ from email.utils import formataddr
+@@ -37,7 +38,9 @@ if sys.platform == 'win32':  # pragma: no cover
+     def _os_link(src, dst):
+         return win32file.CreateHardLink(dst, src, None)
+ else:
+-    _os_link = os.link
++    # Android/Termux: os.link (hard links) is not supported on Android filesystems.
++    # Fall back to shutil.copy which has a compatible (src, dst) signature.
++    _os_link = os.link if hasattr(os, 'link') else shutil.copy
+     pywintypes = None
+

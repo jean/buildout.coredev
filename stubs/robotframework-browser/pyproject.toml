@@ -4,5 +4,5 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "robotframework-browser"
-version = "19.10.1"
+version = "20.0.0"
 description = "Stub for Termux/Android - robotframework-browser requires a browser and cannot run on Android"

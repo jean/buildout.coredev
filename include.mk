@@ -61,3 +61,19 @@ $(SOURCES_TARGET): mxcheckouts.ini mxsources.ini mxtests.ini
 rfbrowser: $(FILES_TARGET) $(SOURCES_TARGET) $(PACKAGES_TARGET) $(TEST_TARGET) $(TEST_DEPENDENCY_TARGETS)
 	@echo "Initializing robotframework browser"
 	@/usr/bin/env bash -c "rfbrowser init chromium"
+
+## Termux compatibility patches
+
+TERMUX_PATCHES_TARGET:=$(SENTINEL_FOLDER)/termux-patches.sentinel
+TERMUX_PATCHES:=patches/apply-termux-patches.sh \
+    patches/ZODB-termux-no-hardlinks.patch \
+    patches/zope-sendmail-termux-no-hardlinks.patch
+
+$(TERMUX_PATCHES_TARGET): $(PACKAGES_TARGET) $(TERMUX_PATCHES)
+	@./patches/apply-termux-patches.sh
+	@touch $(TERMUX_PATCHES_TARGET)
+
+.PHONY: termux-patches
+termux-patches: $(TERMUX_PATCHES_TARGET)
+
+zope-start: termux-patches

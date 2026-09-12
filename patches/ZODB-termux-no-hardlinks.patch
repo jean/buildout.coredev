@@ -1,0 +1,11 @@
+diff --git a/ZODB/blob.py b/ZODB/blob.py
+--- a/ZODB/blob.py
++++ b/ZODB/blob.py
+@@ -947,7 +947,9 @@ else:
+     remove_committed = os.remove
+     remove_committed_dir = shutil.rmtree
+-    link_or_copy = os.link
++    # Android/Termux: os.link (hard links) is not supported on Android filesystems.
++    # Fall back to shutil.copy which has a compatible (src, dst) signature.
++    link_or_copy = os.link if hasattr(os, 'link') else shutil.copy
+
